@@ -19,11 +19,8 @@ wouldU에서는 모두가 대회를 개최하고, 참가하고, 평가할 수 �
 ✨would_U에서는 어떤 일들이 가능할까요?
 
 1️⃣ 회원가입/로그인
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9466c11f-92a6-460c-822b-8b1ad4b7e2e4/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9466c11f-92a6-460c-822b-8b1ad4b7e2e4/Untitled.png)
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/def48aea-3ee9-48d5-acb3-6d0f0d6d8477/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/def48aea-3ee9-48d5-acb3-6d0f0d6d8477/Untitled.png)
-**
-❗** would_U를 이용하기 위해서는 회원가입이 필요합니다. 간단한 회원가입 이후 would_U를 이용해보세요😉
+![localhost_8000_accounts_signup_](https://user-images.githubusercontent.com/54874529/104111435-0bb15b00-5325-11eb-9bd2-f35e28384bbf.png)
+❗would_U를 이용하기 위해서는 회원가입이 필요합니다. 간단한 회원가입 이후 would_U를 이용해보세요😉
 
 2️⃣ 검색
 would_U에는 수많은 대회 소개글과 커뮤니티 게시글들이 있습니다. 기억이 나지 않는 글들을 키워드를 이용하여 검색해보세요! 제목, 내용에 상관없이 해당 단어가 포함된 글을 모두 찾아줍니다!

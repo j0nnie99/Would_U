@@ -1,0 +1,124 @@
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<head>
+    <title>Would_U</title>
+    <meta charset="utf-8">
+    <style>
+    ul {
+        list-style: none;
+    }
+    nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .25em;
+        height: 55px;
+        background-color : white;
+    }
+    nav ul{
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0;
+    }
+    nav ul li {
+        padding:0;
+        margin:0;
+    }
+    nav ul li a{
+        padding: 1em;
+        font-size: flex;
+        align-items: flex-end;
+        color : #172b4d;
+    }
+    nav ul li a:hover{
+        color: #696de4;
+        text-decoration: none;
+    }
+    #logo{display:block; margin:0px auto; margin-bottom:-20px;}
+
+    .wouldU_menu2{
+        float:right;
+    }
+    /*@font-face {
+            font-family: 'KyoboHand';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }      
+    body{font-family: "KyoboHand";}*/
+
+    @font-face {
+    font-family: 'paybooc-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+    body{
+        font-family:"paybooc-Medium";
+        color:#172b4d;
+    };
+
+    footer{
+          color:#172b4d;
+          text-align:right;
+          margin-right:30px;
+        }
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    
+</head>
+
+<body id="jejugothic">
+
+    
+<nav class = "wouldU_nav">
+    <ul class = "woudlU_menu">
+        <li><a href="{% url 'main' %}"><i class="fas fa-home"></i>&nbsp;홈</a></li>
+        {% if user.is_authenticated %}        
+        <li><a href="{% url 'joinList' %}"><i class="fas fa-bars"></i>&nbsp;참여/응원하기</a></li>
+        <li><a href="{% url 'new' %}"><i class="fas fa-bookmark"></i>&nbsp;개최하기</a></li>
+        <!--<li><a href="{% url 'comList' %}"><i class="fas fa-bookmark"></i>&nbsp;구경하기</a></li>-->
+        <li><a href="{% url 'comList' %}"><i class="fas fa-paper-plane"></i>&nbsp;커뮤니티</a></li>
+        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp;로그아웃</a></li>
+        <li><a href="{% url 'mypage' %}"><i class="fas fa-id-card"></i>&nbsp;마이페이지</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>로그인</a></li>
+        <li><a href="{% url 'signup' %}"><i class="fas fa-user-plus"></i>&nbsp;회원가입</a></li>
+        {% endif %}
+    </ul>
+</nav>
+<div style="text-align: right; color: indianred; text-shadow: 1px 1px 1px indianred;">
+{% if not user.is_authenticated %}
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">X</button>
+    <a href="#" class="alert-link">로그인 하셔야 대회 상세내역 열람이 가능합니다.</a>
+  </div>
+{% endif %}
+</div>
+
+<div style="text-align: center"><br><a href="{% url 'main' %}"><img style="width: 400px; margin: 0 auto" src ="{% static '로고.png' %}"> </a>
+</div>
+<br>
+{% block content %}
+
+{% endblock %}
+
+</body>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div style="text-align:center; margin-right:5%;">
+<hr>
+<footer style="display: block">
+    Copyright ⓒ LionSong. All Rights Reserved.
+</footer>
+<br>
+</div>
+

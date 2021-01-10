@@ -1,0 +1,132 @@
+<!--board.html-->
+{% extends 'nav.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% block content %}
+<head>
+  <style>
+    .title:link {text-decoration: none; color: black;}
+    .title:visited {text-decoration: none; color: black;}
+    .title:active {text-decoration: none; color:black;}
+    .title:hover {text-decoration: underline; color:black;}
+    </style>
+<script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+    
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+    
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+    };
+    $(document).ready(function(){
+      var sort = getUrlParameter('sort');
+      if(sort == 'writedate'){
+        $('.sort-writedate').prop('selected', 'selected')
+      }else if(sort == 'date'){
+        $('.sort-date').prop('selected', 'selected')
+      }else if (sort == 'view'){
+        $('.sort-view').prop('selected', 'selected')
+      }else if (sort == 'scrap'){
+        $('.sort-scrap').prop('selected', 'selected')
+      }
+    });
+    </script>
+</head>
+<body>
+    
+<br>
+<div class ="body_margin">
+<div class="bar">
+
+
+<div class="bar2" style="margin-left: 10%;">
+    <select id = "sort-select" onchange="location = this.value;">
+        <option class = "sort-writedate" value="?sort=writedate">작성순</option>
+        <option class = "sort-date" value="?sort=date">최신순</option>
+        <option class = "sort-view" value="?sort=view">조회수순</option>
+        <option class = "sort-scrap" value="?sort=scrap">스크랩순</option>
+    </select>
+    <a style="text-align: right; float:right; margin-right:11%; " href="{% url 'com_new' %}"><input type="button" style="width: 90px; height: 30px; border: 0; outline: 0; color:white; background-color:#696de4; border-radius: 5px;" value="글쓰기"></a>
+
+</div>
+<br><br>  
+<div style="width: 100%;">
+    <table class="table" style="width : 80% ;margin-left: auto; margin-right: auto;">
+        
+        <thead>
+            <tr style="background-color:#ececec">
+                <th style="text-align:center" scope = "col">제목</th>
+                <th style="text-align:center" scope = "col">조회수</th>
+                <th style="text-align:center" scope = "col">좋아요 수</th>
+                <th style="text-align:center" scope = "col">작성일</th>
+                <th style="text-align:center" scope = "col">작성자</th>
+                <th style="text-align:center" scope = "col"><i class="fas fa-heart"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for plan in posts %}
+            <tr onmouseover="this.style.background='#cfcfe4'" onmouseout="this.style.background='white'">
+                <td style="text-align:center" ><a class="title" href="{% url 'community' plan.id %}">{{plan.title}}</a></td>
+                <td style="text-align:center">{{plan.view_count}}</td>
+                <td style="text-align:center">{{plan.scrap_count}}</td>
+                <td style="text-align:center">{{plan.pub_date | date:'Y.m.d H:i'}}</td>
+                <td style="text-align:center">{{plan.username}}</td>
+                <td style="text-align:center">
+                    {% if user in plan.scrap_user_set.all %}
+                    <a href="{% url 'scrap' plan.id %}" class = "btn btn-dark btn-sm">좋아요 취소</a>
+                    {% else %}
+                    <a href ="{% url 'scrap' plan.id %}" class = "btn btn-dark btn-sm">좋아요</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="container"  style="text-align: center;">
+    {% if posts.has_previous %}
+    <a href="?page=1">맨 앞으로</a>
+    <a href="?page={{posts.previous_page_number}}">이전으로</a> <br>
+    {% endif %}
+    <span>{{posts.number}}</span>
+    <span>/</span>
+    <span>{{posts.paginator.num_pages}}</span> 
+    <br>
+    {% if posts.has_next %}
+    <a href="?page={{posts.next_page_number}}">다음으로</a>
+    <a href="?page={{posts.paginator.num_pages}}">맨 뒤로</a> 
+    {% endif %}
+</div>
+</div>
+</div>
+
+<br><br><br>
+<div class="search-bar" style="margin-left:10%; margin-right:10%;">
+    <form action="{%url 'search'%}", method="get">
+      <div class="row">
+        <div class="col align-items-center form-group">
+          <input class="form-control border-2 shadow-2" type="search" name="query"
+            style="border-radius: 30px; border:lightgray solid 2px;" text-align="center"
+            placeholder=" 두근두근 고카톤">
+        </div>
+    </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-dark btn-block rounded-xl h-80" type="submit">검색 </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+</body>
+
+{%endblock%}

@@ -1,0 +1,41 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<style>
+    a:link {text-decoration: none; color: black;}
+    a:visited {text-decoration: none; color: black;}
+    a:active {text-decoration: none; color:black;}
+    a:hover {text-decoration: underline; color:black;}
+    </style>
+<div style="margin-left: 30px;">
+<h4>제목 검색결과</h4><br>
+<div style="margin-left: 5px;">
+{% for post in result_title.all %}
+{% if user.is_authenticated %}
+<h3><a href="{% url 'show' post.id %}">{{ post.title }}</a></h3> 
+{% else %}
+<h3>{{ post.title }}</h3>
+{% endif %}
+{% endfor %}
+
+</div>
+<hr>
+
+<br>
+<h4>내용 검색결과</h4><br>
+<div style="margin-left: 5px;">
+{% for post in result_body.all %}
+{% if user.is_authenticated %}
+<h3><a href="{% url 'show' post.id %}">{{ post.title }}</a></h3> 
+{% else %}
+<h3>{{ post.title }}</h3>
+{% endif %}
+{% endfor %}
+<!---
+<h3>{{ post }}</h3>
+<td>{{plan.title}}</td>-->
+</div>
+<hr>
+<br>
+</div>
+{%endblock%}

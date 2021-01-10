@@ -1,0 +1,80 @@
+{% extends 'nav.html' %}
+{% load bootstrap4 %}{% bootstrap_css %}
+{% block content %}
+
+
+
+<div class="search-bar" style="margin-left: 5%; margin-right:5%;">
+      <form action="{%url 'search'%}", method="get">
+        <div class="row">
+          <div class="col align-items-center form-group">
+            <input class="form-control border-2 shadow-2" type="search" name="query"
+              style="border-radius: 30px; border: black solid 2px;" text-align="center"
+              placeholder=" 두근두근 고카톤">
+          </div>
+      </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-dark btn-block rounded-xl h-80" type="submit">검색 </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+<div style="margin-left: 5%; margin-top: 3%; margin-right:5%;">
+  <strong><h3 style="text-align:center; font-weight:bold;">{{ post.title }}</h3></strong>
+
+  {% if post.join_counting >= post.min %}
+      <h4 style="text-decoration-line: underline; color: hotpink; text-align:center;">개최 확정!</h4>
+  {% else %}
+      <h4 style="color:gray; text-shadow: 2px 2px 2px darkgray; text-align:center;">개최 미정</h4>
+  {% endif %}
+  <div style="text-align:right;">
+  작성자 : {{ post.username }} &nbsp;&nbsp;
+  작성일 : {{ post.created_at | date:'Y.m.d H:i'}} &nbsp;&nbsp;
+  수정일 : {{ post.updated_at | date:'Y.m.d H:i'}}
+  </div>
+  <h5>최소 참여자 수 : <strong>{{post.min}}</strong>명
+  &nbsp;&nbsp; <br>현재 참여자 수 :  <strong>{{post.join_counting}}</strong>명</h5>
+
+ <hr>
+ <table style="margin:30px;padding:30px"><tr><td>{%if post.image%}<img src="{{post.image.url}}" style="max-width:50%; height:auto;" >{%endif%}</td></tr>
+<tr><td> <br><br> </td></tr>
+ <tr><td><p>{{ post.content }}</p></td></tr>
+ <tr><td><p>{{ post.criteria }}</p></td></tr>
+ <tr><td><strong>참가비 : {{post.charge}}</strong></td></tr>
+</table>
+
+<hr>
+<div>
+  <div style="text-align:left; float:left;">
+    {% ifequal request.user post.username %}
+    <a href="{% url 'blogupdate' post.id %}" class="btn btn-outline-secondary">수정하기</a>
+    <a href="{% url 'delete' post.id %}" onclick="return confirm('삭제 하시겠습니까?')" class="btn btn-outline-secondary">삭제하기</a>
+    {% endifequal %}
+  </div>
+<div style="text-align: right; float:right;">
+  {% if join %}
+      <a href="{% url 'join' post.id %}" class="btn btn-primary">참여완료</a>
+  {% else %}
+      <a href="{% url 'join' post.id %}" class="btn btn-primary">참여하기</a>
+  {% endif %}
+
+  {% if like %}
+  <a href="{% url 'like' post.id %}">
+   <span class="btn btn-info">좋아요 취소({{post.like_count}})</span>
+     </a>
+  {% else %}
+  <a href="{% url 'like' post.id %}">
+   <span class="btn btn-info">좋아요({{post.like_count}})</span>
+     </a>{% endif %}
+  </div>
+</div>
+<script>
+  function open_page(url) {
+    newPage=window.open(url);
+}
+</script>
+
+
+{% endblock %}

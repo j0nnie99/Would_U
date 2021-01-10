@@ -1,0 +1,29 @@
+{% extends 'nav.html' %}
+<title>WouldU</title>
+{% block content %}
+
+
+<style>
+    #forms {margin-left:30%; margin-right:30%;}
+</style>
+<br>
+<h2 style="text-align: center;">수정하기</h2>
+<br>
+<form id="forms" method='POST' enctype="multipart/form-data">
+    {% csrf_token %}
+    <table style="margin-left: auto; margin-right: auto; ">
+        대회명 {{form.title}}<br>
+        참가비용 {{form.charge}}<br>
+        최대인원 {{form.max}}<br>
+        최소인원 {{form.min}}<br>
+        마감일 {{form.date}}<br>
+        심사기준 {{form.criteria}}<br>
+        대회소개 {{form.content}}<br>
+        소개 포스터 {{form.image}}<br>
+    </table>
+    <br>
+    <div text-align="center">
+    <input type="submit" value="수정">
+    </div>
+</form>
+{% endblock %}

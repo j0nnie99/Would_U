@@ -1,0 +1,16 @@
+<!--search.html-->
+
+<h4>제목 검색결과</h4>
+{% for community in result_com.all %}
+<a href="{%url 'blog' blog.id%}">{{blog}}</a>
+<br>
+{% endfor %}
+<hr>
+<br>
+<h4>내용 검색결과</h4>
+{% for blog in result_body.all %}
+<a href="{%url 'blog' blog.id%}">{{blog}}</a>
+<br>
+{% endfor %}
+<hr>
+<br>

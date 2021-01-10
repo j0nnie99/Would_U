@@ -1,0 +1,51 @@
+<!--blogdetail.html-->
+{% extends 'nav.html' %}
+{% block content %}
+<div><br><br><br>
+<a href="{% url 'comList' %}" style="text-align:center; font-weight:bold;"><h2>{{post.title}}</h2></a></div>
+<br>
+<div style="margin-left:5%; margin-right:10%; float:right; text-align: right;">
+{% if user == post.username %}
+    작성자 : {{post.username}}(나) <br>
+{% else %}
+    작성자 : {{post.username}} <br>
+{% endif %}
+작성 일자 : {{post.pub_date | date:'Y.m.d H:i'}} <br>
+수정 일자 : {{post.updated_at | date:'Y.m.d H:i'}} <br>
+</div>
+
+<br><br><br><br><br>
+
+<div style="text-align: center;">
+    <p>{{post.body}}</p>
+</div>
+
+<br><br><br><br>
+<div style="text-align: right; margin-right:10%; margin-left:10%;">
+    <hr>
+<div style="float:left;">
+    {% ifequal request.user post.username %}
+    <a href="{% url 'com_update' post.id %}" class="btn btn-outline-secondary">수정하기</a>
+    <a href="{% url 'com_delete' post.id %}" onclick="return confirm('삭제 하시겠습니까?')" class="btn btn-outline-secondary">삭제하기</a>
+    {% endifequal %}
+</div>
+
+<div style="float:right;">
+    <i class="fas fa-heart"></i>&nbsp;{{post.scrap_count}}
+<br>
+{% if scrap %}
+    <a href="{% url 'scrap' post.id %}" class="btn btn-primary btn-sm">좋아요 취소</a>
+{% else %}
+    <a href="{% url 'scrap' post.id %}" class="btn btn-primary btn-sm">좋아요</a>
+{% endif %}
+</div>
+</div>
+
+
+<br><br><br><br>
+
+<div style="margin-left:10%; margin-right:10%;">
+{%load disqus_tags%}
+{%disqus_show_comments%}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!--new.html-->
+{% extends 'nav.html' %}
+{% block content %}
+
+<style>
+    #forms {margin-left:30%; margin-right:30%;}
+</style>
+
+<br>
+<br>
+<form style="text-align:left;" id="forms" method='POST' enctype="multipart/form-data">
+    {% csrf_token %}
+    <table style="margin-left: auto; margin-right: auto; ">
+        새 글 제목 : {{form.title}}<br>
+        내용 : {{form.body}}
+    </table>
+    <br>
+    <div style="text-align: center;">
+    <input type="submit" style = "width: 90px; height: 30px; border: 0; outline: 0; color:white; background-color:#696de4; border-radius: 5px;" value="등록">
+    </div>
+</form>
+
+{% endblock %}

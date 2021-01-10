@@ -1,0 +1,67 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<br><br>
+<head>
+  <style>
+    #my:link {text-decoration: none ; color:#5fa4ff;}
+    #my:visited {text-decoration: none; color: #5fa4ff;}
+    #my:active {text-decoration: none; color:#5fa4ff;}
+    #my:hover {text-decoration: underline; color:#696de4;}
+  </style>
+  <script>
+    function open_page(url) {
+      newPage=window.open(url);
+  }
+  </script>
+</head>
+<body>
+<div style="margin-left: 5%; margin-right: 5%;">
+
+<h1>{{username}} 님</h1>
+<br><br>
+개최 확정 대회 : 
+{% for post in userpost.all %}
+{% if post.join_counting >= post.min %}
+    <a class="my" href="{% url 'show' post.id %}">{{ post.title }}</a>
+{%endif%}
+{%endfor%}
+<br><br>
+<hr>
+개최 미정 대회 : 
+{% for post in userpost.all %}
+{% if post.join_counting < post.min %}
+<a class="my" href="{% url 'show' post.id %}">{{ post.title }}</a>
+{%endif%}
+{%endfor%}
+<br><br>
+<hr>
+참여 신청한 대회 : 
+{% for post in userjoin.all %}
+<a class="my" href="{% url 'show' post.post.id %}">{{ post }}</a>
+{%endfor%}
+<input type="button" style = "width: 90px; height: 30px; border: 0; outline: 0; color:white; background-color:#696de4; border-radius: 5px; float:right" onclick="open_page('pay')" value="  결제하기  ">
+<br><br>
+<hr>
+응원 중인 대회:
+{% for post in userlike.all %}
+<a class="my" href="{% url 'show' post.post.id %}">{{ post }}</a>
+{%endfor%}
+<br><br>
+<hr>
+작성한 커뮤니티 글:
+{% for post in compost.all %}
+<a class="my" href="{% url 'community' post.id %}">{{post.title}}</a>
+{% endfor %}
+<br><br>
+<hr>
+찜한 커뮤니티 글:
+{% for post in comscrap.all %}
+<a class="my" href="{% url 'community' post.post.id %}">{{post.post.title}}</a>
+{% endfor %}
+<br><br>
+<hr>
+
+</div>
+</body>
+{% endblock %}

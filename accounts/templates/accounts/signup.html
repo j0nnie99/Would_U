@@ -1,0 +1,27 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+{% if error %}
+{{ error }}s
+<br>
+<br>
+{% endif %}
+
+<h1 style="text-align: center;"> Sign Up! </h1>
+<br>
+<form method="POST" action="{% url 'signup' %}">
+
+{% csrf_token %}
+<div style="text-align: center;">Username:</div>
+<input style="display:block; width: 200px; margin-left: auto; margin-right: auto;" name="username"  type="text" value="">
+<br><div style="text-align: center;">Password: </div>
+<input style="display:block; width: 200px; margin-left: auto; margin-right: auto;" name="password1" type="password1" value=""> 
+<br><div style="text-align: center;">Confirm Password:</div>
+<input style="display:block; width: 200px; margin-left: auto; margin-right: auto;" name="password2" type="password" value="">
+<br><br>
+<div style="text-align: center;">
+<input class="btn btn-primary" style="border: 0; outline: 0; background-color:#696de4;" type="submit" value="Sign Up!"></div>
+</form>
+
+{% endblock %}
+
